@@ -1,4 +1,5 @@
 import { IUser } from "@/types/user.type";
+import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -17,9 +18,21 @@ const userSchema = new mongoose.Schema<IUser>({
     },
     mobile: {
         type: String,
-        required: true,
+        minlength: [10, "Minimum 10 char required"],
+        maxlength: [10, "Maximum 10 char required"],
     },
 }, { timestamps: true })
+
+
+userSchema.pre('save', function (): void {
+    if (!this.isModified("password")) return
+
+    this.password = bcrypt.hashSync(this.password, 10)
+})
+
+userSchema.methods.comparePassword = function (password: string): boolean {
+    return bcrypt.compareSync(password, this.password)
+}
 
 const User = mongoose.model("User", userSchema)
 export default User
