@@ -6,7 +6,7 @@ import { ApiResponse } from "@/types/api.types"
 import { JWTPayload, RegisterBody } from "@/types/user.type"
 import { NextRequest, NextResponse } from "next/server"
 
-async function POST(req: NextRequest) { // NextRequest is used to get the values or parameters from the client or browser for POST , PUT , PATCH , DELETE  
+export async function POST(req: NextRequest) { // NextRequest is used to get the values or parameters from the client or browser for POST , PUT , PATCH , DELETE  
 
     try {
         await connectDB()  // always you have to pass the connectDb fnc in any api route

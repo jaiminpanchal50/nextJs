@@ -2,7 +2,12 @@ import { IUser } from "@/types/user.type";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema<IUser>({
+interface IUserWithComparePass extends Omit<IUser, "_id"> {
+    _id: mongoose.Types.ObjectId
+    comparePassword: (password: string) => boolean
+}
+
+const userSchema = new mongoose.Schema<IUserWithComparePass>({
     name: {
         type: String,
         required: true,

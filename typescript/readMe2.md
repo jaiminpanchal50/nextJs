@@ -158,7 +158,7 @@ interface IUser {
 // Here we have removed the password field from the IUser interface
 // Here we create new interface its propertied is same as IUser but exclude the password field from that
 //      interface name    parent interface name     property that we want to remove from the parent interface                                   
-             |                          |            |   
+//              |                          |            |   
 interface IUserWithoutPassword extends Omit<IUser, "password"> { } // inside the Omit the first value is the name of the interfaces and second value is the name of the property that we want to remove from the interface
 
 // we have created a compair pass method in model but when we use it we getting an error so we have to pass that method in to the Document type to avoid that error, this is a advance level ts 
